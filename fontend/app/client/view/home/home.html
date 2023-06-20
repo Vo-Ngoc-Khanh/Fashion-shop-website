@@ -1,0 +1,291 @@
+<!-- Start Slider Area -->
+<div class="axil-main-slider-area main-slider-style-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="main-slider-content">
+                    <h1 class="title">Life is more than sunglasses and hit movies.</h1>
+                    <div class="shop-btn">
+                        <a href="#!/view-all" class="axil-btn btn-bg-primary"><i class="far fa-shopping-cart"></i> Check
+                            it Out!</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="slide-thumb-area">
+                    <div class="main-thumb">
+                        <img src="../assets/pages/images/banner/women_sunglass.png" alt="Women's Product">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Slider Area -->
+
+<!-- Start Expolre Product Area  -->
+<div class="axil-product-area bg-color-white axil-section-gap">
+    <div class="container">
+        <div class="section-title-wrapper">
+            <span class="title-highlighter highlighter-primary"> <i class="far fa-shopping-basket"></i> Our Products</span>
+            <h2 class="title">Explore our Products</h2>
+        </div>
+        <div class="explore-product-activation slick-layout-wrapper slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide">
+            <!-- End .slick-single-layout -->
+            <div class="slick-single-layout">
+                <div class="row row--15">
+                    <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30" ng-repeat="product in products | orderBy:'-productId' | limitTo:8">
+                        <div class="axil-product product-style-one">
+                            <div class="thumbnail">
+                                <a href="#!/detail/{{product.productId}}">
+                                    <img ng-src="{{product.image}}" alt="Product Images">
+                                </a>
+                                <div class="product-hover-action">
+                                    <ul class="cart-action">
+                                        <li class="quickview">
+                                            <a ng-click="getModalProductDetail(product.productId)" data-bs-toggle="modal" data-bs-target="#quick-view-modal">
+                                                <i class="far fa-eye"></i>
+                                            </a>
+                                        </li>
+                                        <li class="select-option"><a href="#!/cart" ng-click="addToCart(product)">Add to Cart</a></li>
+                                        <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="inner">
+                                    <h5 class="title"><a href="#!/detail/{{product.productId}}">{{product.name}}</a></h5>
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">${{product.price}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Product  -->
+                </div>
+            </div>
+            <!-- End .slick-single-layout -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center mt--20 mt_sm--0">
+                <a href="#!/view-all" class="axil-btn btn-bg-lighter btn-load-more">View All Products</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Expolre Product Area  -->
+
+<!-- Start Testimonila Area  -->
+<div class="axil-testimoial-area axil-section-gap bg-vista-white">
+    <div class="container">
+        <div class="section-title-wrapper">
+            <span class="title-highlighter highlighter-secondary"> <i class="fal fa-quote-left"></i>Testimonials</span>
+            <h2 class="title">Users Feedback</h2>
+        </div>
+        <!-- End .section-title -->
+        <div class="testimonial-slick-activation testimonial-style-one-wrapper slick-layout-wrapper--20 axil-slick-arrow arrow-top-slide">
+            <div class="slick-single-layout testimonial-style-one">
+                <div class="review-speech">
+                    <p>“ It’s amazing how much easier it has been to
+                        meet new people and create instantly non
+                        connections. I have the exact same personal
+                        the only thing that has changed is my mind
+                        set and a few behaviors. “</p>
+                </div>
+                <div class="media">
+                    <div class="thumbnail">
+                        <img src="../assets/pages/images/testimonial/image-1.png" alt="testimonial image">
+                    </div>
+                    <div class="media-body">
+                        <span class="designation">Head Of Idea</span>
+                        <h6 class="title">James C. Anderson</h6>
+                    </div>
+                </div>
+                <!-- End .thumbnail -->
+            </div>
+            <!-- End .slick-single-layout -->
+            <div class="slick-single-layout testimonial-style-one">
+                <div class="review-speech">
+                    <p>“ It’s amazing how much easier it has been to
+                        meet new people and create instantly non
+                        connections. I have the exact same personal
+                        the only thing that has changed is my mind
+                        set and a few behaviors. “</p>
+                </div>
+                <div class="media">
+                    <div class="thumbnail">
+                        <img src="../assets/pages/images/testimonial/image-2.png" alt="testimonial image">
+                    </div>
+                    <div class="media-body">
+                        <span class="designation">Head Of Idea</span>
+                        <h6 class="title">James C. Anderson</h6>
+                    </div>
+                </div>
+                <!-- End .thumbnail -->
+            </div>
+            <!-- End .slick-single-layout -->
+            <div class="slick-single-layout testimonial-style-one">
+                <div class="review-speech">
+                    <p>“ It’s amazing how much easier it has been to
+                        meet new people and create instantly non
+                        connections. I have the exact same personal
+                        the only thing that has changed is my mind
+                        set and a few behaviors. “</p>
+                </div>
+                <div class="media">
+                    <div class="thumbnail">
+                        <img src="../assets/pages/images/testimonial/image-3.png" alt="testimonial image">
+                    </div>
+                    <div class="media-body">
+                        <span class="designation">Head Of Idea</span>
+                        <h6 class="title">James C. Anderson</h6>
+                    </div>
+                </div>
+                <!-- End .thumbnail -->
+            </div>
+            <!-- End .slick-single-layout -->
+            <div class="slick-single-layout testimonial-style-one">
+                <div class="review-speech">
+                    <p>“ It’s amazing how much easier it has been to
+                        meet new people and create instantly non
+                        connections. I have the exact same personal
+                        the only thing that has changed is my mind
+                        set and a few behaviors. “</p>
+                </div>
+                <div class="media">
+                    <div class="thumbnail">
+                        <img src="../assets/pages/images/testimonial/image-2.png" alt="testimonial image">
+                    </div>
+                    <div class="media-body">
+                        <span class="designation">Head Of Idea</span>
+                        <h6 class="title">James C. Anderson</h6>
+                    </div>
+                </div>
+                <!-- End .thumbnail -->
+            </div>
+            <!-- End .slick-single-layout -->
+
+        </div>
+    </div>
+</div>
+<!-- End Testimonila Area  -->
+
+
+<!-- Start Axil Newsletter Area  -->
+<div class="axil-newsletter-area axil-section-gap pt--0">
+    <div class="container">
+        <div class="etrade-newsletter-wrapper bg_image bg_image--12">
+            <div class="newsletter-content">
+                <span class="title-highlighter highlighter-primary2"><i class="fas fa-envelope-open"></i>Newsletter</span>
+                <h2 class="title mb--40 mb_sm--30">Get weekly update</h2>
+                <div class="input-group newsletter-form">
+                    <div class="position-relative newsletter-inner mb--15">
+                        <input placeholder="example@gmail.com" type="text">
+                    </div>
+                    <button type="submit" class="axil-btn mb--15">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End .container -->
+</div>
+<!-- End Axil Newsletter Area  -->
+
+<!-- Product Quick View Modal Start -->
+<div class="modal fade quick-view-product" id="quick-view-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="far fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="single-product-thumb">
+                    <div class="row">
+                        <div class="col-lg-7 mb--40">
+                            <div class="row">
+                                <div class="col-lg-10 order-lg-2">
+                                    <div class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
+                                        <div class="thumbnail">
+                                            <img ng-src="{{product.image}}" alt="Product Images">
+                                            <div class="product-quick-view position-view">
+                                                <a href="{{product.image}}" class="popup-zoom">
+                                                    <i class="far fa-search-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 order-lg-1">
+                                    <div class="product-small-thumb small-thumb-wrapper">
+                                        <div class="small-thumb-img">
+                                            <img ng-src="{{product.image}}" alt="thumb image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 mb--40">
+                            <div class="single-product-content">
+                                <div class="inner">
+                                    <h3 class="product-title">{{product.name}}</h3>
+                                    <span class="price-amount">${{product.price}}</span>
+                                    <ul class="product-meta">
+                                        <li><i class="fal fa-check"></i>In stock</li>
+                                        <li><i class="fal fa-check"></i>Free delivery available</li>
+                                        <li><i class="fal fa-check"></i>Sales 30% Off Use Code: MOTIVE30</li>
+                                    </ul>
+                                    <p class="description">{{product.description}}</p>
+                                    <div class="product-variations-wrapper">
+                                        <!-- Start Product Variation  -->
+                                        <div class="product-variation">
+                                            <h6 class="title">Colors:</h6>
+                                            <div class="color-variant-wrapper">
+                                                <ul class="color-variant mt--0">
+                                                    <li class="color-extra-01 active"><span><span class="color"></span></span>
+                                                    </li>
+                                                    <li class="color-extra-02"><span><span class="color"></span></span>
+                                                    </li>
+                                                    <li class="color-extra-03"><span><span class="color"></span></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Variation  -->
+                                        <!-- Start Product Variation  -->
+                                        <div class="product-variation">
+                                            <h6 class="title">Size:</h6>
+                                            <ul class="range-variant">
+                                                <li>xs</li>
+                                                <li>s</li>
+                                                <li>m</li>
+                                                <li>l</li>
+                                                <li>xl</li>
+                                            </ul>
+                                        </div>
+                                        <!-- End Product Variation  -->
+                                    </div>
+                                    <!-- Start Product Action Wrapper  -->
+                                    <div class="product-action-wrapper d-flex-center">
+                                        <!-- Start Quentity Action  -->
+                                        <div class="pro-qty"><input type="text" ng-model="quantity"></div>
+                                        <!-- End Quentity Action  -->
+                                        <!-- Start Product Action  -->
+                                        <ul class="product-action d-flex-center mb--0">
+                                            <li class="add-to-cart"><a ng-click="addToCart(product)" class="axil-btn btn-bg-primary" data-bs-dismiss="modal">Add to Cart</a></li>
+                                            <li class="wishlist"><a href="#" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
+                                        </ul>
+                                        <!-- End Product Action  -->
+                                    </div>
+                                    <!-- End Product Action Wrapper  -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product Quick View Modal End -->

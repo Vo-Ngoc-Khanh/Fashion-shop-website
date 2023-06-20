@@ -1,0 +1,84 @@
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">List categories</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-footer">
+            <form>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Input category name" ng-model="category.categoryName" required>
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary" ng-click="addCategory()">Add Category</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-body">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="category in categories">
+                  <td>{{category.categoryName}}</td>
+                  <td>
+                    <button ng-click="getCategoryById(category.categoryId)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-edit">
+                      <i class="fas fa-pencil-alt"></i>
+                      <span>Edit</span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" ng-click="deleteCategory(category.categoryId)">
+                      <i class="fas fa-trash-alt"></i>
+                      <span>Delete</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<div class="modal fade" id="modal-edit">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Category</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" placeholder="Input category name" ng-model="categoryedit.categoryName" required ng-change="checkFormValidity()">
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="updateCategory(categoryedit)" data-dismiss="modal" ng-disabled="!isFormValid">Save changes</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

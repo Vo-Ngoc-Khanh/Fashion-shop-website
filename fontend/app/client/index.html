@@ -1,0 +1,426 @@
+<!doctype html>
+<html class="no-js" lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>eTrade || {{title}}</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/pages/images/favicon.png">
+    <!-- CSS
+    ============================================ -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../assets/pages/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/pages/css/vendor/font-awesome.css">
+    <link rel="stylesheet" href="../assets/pages/css/vendor/flaticon/flaticon.css">
+    <link rel="stylesheet" href="../assets/pages/css/vendor/slick.css">
+    <link rel="stylesheet" href="../assets/pages/css/vendor/slick-theme.css">
+    <link rel="stylesheet" href="../assets/pages/css/vendor/jquery-ui.min.css">
+    <link rel="stylesheet" href="../assets/pages/css/vendor/sal.css">
+    <link rel="stylesheet" href="../assets/pages/css/vendor/magnific-popup.css">
+    <link rel="stylesheet" href="../assets/pages/css/vendor/base.css">
+    <link rel="stylesheet" href="../assets/pages/css/style.min.css">
+
+    <!--Thong bao-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+</head>
+
+<body class="sticky-header" ng-controller="HomeController">
+    <a href="#top" class="back-to-top" id="backto-top"><i class="fal fa-arrow-up"></i></a>
+    <!-- Start Header -->
+    <header class="header axil-header header-style-5">
+        <div class="axil-header-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="header-top-dropdown">
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    English
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Arabic</a></li>
+                                    <li><a class="dropdown-item" href="#">Spanish</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    USD
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">USD</a></li>
+                                    <li><a class="dropdown-item" href="#">AUD</a></li>
+                                    <li><a class="dropdown-item" href="#">EUR</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="header-top-link">
+                            <ul class="quick-link">
+                                <li><a href="#">Help</a></li>
+                                <li><a href="/dashboard/view/auth/register.html">Join Us</a></li>
+                                <li><a href="/dashboard/view/auth/login.html">Sign In</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Start Mainmenu Area  -->
+        <div id="axil-sticky-placeholder"></div>
+        <div class="axil-mainmenu">
+            <div class="container">
+                <div class="header-navbar">
+                    <div class="header-brand">
+                        <a href="#!/home" class="logo logo-dark">
+                            <img src="../assets/pages/images/logo/logo.png" alt="Site Logo">
+                        </a>
+                        <a href="#!/home" class="logo logo-light">
+                            <img src="../assets/pages/images/logo/logo-light.png" alt="Site Logo">
+                        </a>
+                    </div>
+                    <div class="header-main-nav">
+                        <!-- Start Mainmanu Nav -->
+                        <nav class="mainmenu-nav">
+                            <button class="mobile-close-btn mobile-nav-toggler"><i class="fas fa-times"></i></button>
+                            <div class="mobile-nav-brand">
+                                <a href="#" class="logo">
+                                    <img src="../assets/pages/images/logo/logo.png" alt="Site Logo">
+                                </a>
+                            </div>
+                            <ul class="mainmenu">
+                                <li><a href="#!/home">Home</a></li>
+                                <li class="menu-item-has-children">
+                                    <a href="#!/home">Shop</a>
+                                    <ul class="axil-submenu">
+                                        <li ng-repeat="category in categories">
+                                            <a href="#!/search/category?categoryName={{category.categoryName}}">{{category.categoryName}}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#!/about">About</a></li>
+                                <li><a href="#!/contact">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <!-- End Mainmanu Nav -->
+                    </div>
+                    <div class="header-action">
+                        <ul class="action-list">
+                            <li class="axil-search">
+                                <input type="search" placeholder="Search..." ng-model="keyword">
+                                <button type="submit" class="icon wooc-btn-search" ng-click="gotoSearchPage()">
+                                    <i class="flaticon-magnifying-glass"></i>
+                                </button>
+                            </li>                        
+                            <li class="wishlist">
+                                <a href="#">
+                                    <i class="flaticon-heart"></i>
+                                </a>
+                            </li>
+                            <li class="shopping-cart">
+                                <a href="#" class="cart-dropdown-btn">
+                                    <span class="cart-count">{{cart.length}}</span>
+                                    <i class="flaticon-shopping-cart"></i>
+                                </a>
+                            </li>
+                            <li class="my-account">
+                                <a href="javascript:void(0)">
+                                    <i class="flaticon-person"></i>
+                                </a>
+                                <div class="my-account-dropdown" ng-show="auth">
+                                    <span class="title">QUICKLINKS</span>
+                                    <ul ng-show="auth">
+                                        <li>
+                                            <a href="#!/my-account">My Account</a>
+                                        </li>
+                                        <li ng-show="admin">
+                                            <a href="/dashboard/#!/dashboard">Manager System</a>
+                                        </li>
+                                    </ul>
+                                    <hr>
+                                    <a ng-click="logout()" class="axil-btn btn-bg-primary">Logout</a>   
+                                </div>
+                                <div class="my-account-dropdown" ng-show="!auth">
+                                    <span class="title">QUICKLINKS</span>
+                                    <a href="/dashboard/view/auth/login.html" class="axil-btn btn-bg-primary">Login</a>
+                                    <div class="reg-footer text-center">No account yet? <a href="/dashboard/view/auth/register.html" class="btn-link">REGISTER HERE.</a></div>      
+                                </div>
+                            </li>
+                            <li class="axil-mobile-toggle">
+                                <button class="menu-btn mobile-nav-toggler">
+                                    <i class="flaticon-menu-2"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Mainmenu Area -->
+    </header>
+    <!-- End Header -->
+    <main class="main-wrapper">
+        <div class="axil-checkout-area axil-section-gap">
+            <!-- Route view -->
+            <ng-view></ng-view>
+        </div>        
+    </main>
+
+    <div class="service-area">
+        <div class="container">
+            <div class="row row-cols-xl-4 row-cols-sm-2 row-cols-1 row--20">
+                <div class="col">
+                    <div class="service-box service-style-2">
+                        <div class="icon">
+                            <img src="../assets/pages/images/icons/service1.png" alt="Service">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Fast &amp; Secure Delivery</h6>
+                            <p>Tell about your service.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="service-box service-style-2">
+                        <div class="icon">
+                            <img src="../assets/pages/images/icons/service2.png" alt="Service">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Money Back Guarantee</h6>
+                            <p>Within 10 days.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="service-box service-style-2">
+                        <div class="icon">
+                            <img src="../assets/pages/images/icons/service3.png" alt="Service">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">24 Hour Return Policy</h6>
+                            <p>No question ask.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="service-box service-style-2">
+                        <div class="icon">
+                            <img src="../assets/pages/images/icons/service4.png" alt="Service">
+                        </div>
+                        <div class="content">
+                            <h6 class="title">Pro Quality Support</h6>
+                            <p>24/7 Live support.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Footer Area  -->
+    <footer class="axil-footer-area footer-style-2">
+        <!-- Start Footer Top Area  -->
+        <div class="footer-top separator-top">
+            <div class="container">
+                <div class="row">
+                    <!-- Start Single Widget  -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="axil-footer-widget">
+                            <h5 class="widget-title">Support</h5>
+                            <!-- <div class="logo mb--30">
+                            <a href="#">
+                                <img class="light-logo" src="../assets/pages/images/logo/logo.png" alt="Logo Images">
+                            </a>
+                        </div> -->
+                            <div class="inner">
+                                <p>685 Market Street, <br>
+                                Las Vegas, LA 95820, <br>
+                                United States.
+                                </p>
+                                <ul class="support-list-item">
+                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i> example@domain.com</a></li>
+                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+01) 850-315-5862</a></li>
+                                    <!-- <li><i class="fal fa-map-marker-alt"></i> 685 Market Street,  <br> Las Vegas, LA 95820, <br> United States.</li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Widget  -->
+                    <!-- Start Single Widget  -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="axil-footer-widget">
+                            <h5 class="widget-title">Account</h5>
+                            <div class="inner">
+                                <ul>
+                                    <li><a href="#!/my-account">My Account</a></li>
+                                    <li><a href="/dashboard/view/auth/login.html">Login / Register</a></li>
+                                    <li><a href="#!/cart">Cart</a></li>
+                                    <li><a href="#">Wishlist</a></li>
+                                    <li><a href="#!/view-all">Shop</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Widget  -->
+                    <!-- Start Single Widget  -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="axil-footer-widget">
+                            <h5 class="widget-title">Quick Link</h5>
+                            <div class="inner">
+                                <ul>
+                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                                    <li><a href="terms-of-service.html">Terms Of Use</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#!/contact">Contact</a></li>
+                                    <li><a href="#!/contact">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Widget  -->
+                    <!-- Start Single Widget  -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="axil-footer-widget">
+                            <h5 class="widget-title">Download App</h5>
+                            <div class="inner">
+                                <span>Save $3 With App & New User only</span>
+                                <div class="download-btn-group">
+                                    <div class="qr-code">
+                                        <img src="../assets/pages/images/others/qr.png" alt="Axilthemes">
+                                    </div>
+                                    <div class="app-link">
+                                        <a href="#">
+                                            <img src="../assets/pages/images/others/app-store.png" alt="App Store">
+                                        </a>
+                                        <a href="#">
+                                            <img src="../assets/pages/images/others/play-store.png" alt="Play Store">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Widget  -->
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Top Area  -->
+        <!-- Start Copyright Area  -->
+        <div class="copyright-area copyright-default separator-top">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-4">
+                        <div class="social-share">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12">
+                        <div class="copyright-left d-flex flex-wrap justify-content-center">
+                            <ul class="quick-link">
+                                <li>© 2023. All rights reserved by <a target="_blank" href="https://axilthemes.com/">Axilthemes</a>.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12">
+                        <div class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
+                            <span class="card-text">Accept For</span>
+                            <ul class="payment-icons-bottom quick-link">
+                                <li><img src="../assets/pages/images/icons/cart/cart-1.png" alt="paypal cart"></li>
+                                <li><img src="../assets/pages/images/icons/cart/cart-2.png" alt="paypal cart"></li>
+                                <li><img src="../assets/pages/images/icons/cart/cart-5.png" alt="paypal cart"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Copyright Area  -->
+    </footer>
+    <!-- End Footer Area  -->
+
+    <!-- Start Cart Dropdown  -->
+    <div class="cart-dropdown" id="cart-dropdown" >
+        <div class="cart-content-wrap">
+            <div class="cart-header">
+                <h2 class="header-title">Cart review</h2>
+                <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="cart-body">
+                <ul class="cart-item-list">
+                    <li class="cart-item" ng-repeat="item in cart track by item.id">
+                        <div class="item-img">
+                            <a href="#!/detail/{{item.productId}}"><img ng-src="{{item.image}}" alt="Product image"></a>
+                            <button class="close-btn" ng-click="deleteItemFromCart($index)">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                        </div>
+                        <div class="item-content">
+                            <h3 class="item-title"><a href="#!/detail/{{item.productId}}">{{item.name}}</a></h3>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{item.price}}</div>
+                            <div class="pro-qty item-quantity">
+                                <input type="number" class="quantity-input" ng-model="item.quantity" ng-change="updateQuantity()">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="cart-footer">
+                <h3 class="cart-subtotal">
+                    <span class="subtotal-title">Subtotal:</span>
+                    <span class="subtotal-amount">${{ calculateTotal() }}</span>
+                </h3>            
+                <div class="group-btn">
+                    <a href="#!/cart" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
+                    <a class="axil-btn btn-bg-secondary checkout-btn" ng-click="gotoCheckoutPage()">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Cart Dropdown  -->
+
+    <!-- JS
+    ============================================ -->
+    <!-- Modernizer JS -->
+    <script src="../assets/pages/js/vendor/modernizr.min.js"></script>
+    <!-- jQuery JS -->
+    <script src="../assets/pages/js/vendor/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="../assets/pages/js/vendor/popper.min.js"></script>
+    <script src="../assets/pages/js/vendor/bootstrap.min.js"></script>
+    <script src="../assets/pages/js/vendor/slick.min.js"></script>
+    <script src="../assets/pages/js/vendor/js.cookie.js"></script>
+    <!-- <script src="../assets/pages/js/vendor/jquery.style.switcher.js"></script> -->
+    <script src="../assets/pages/js/vendor/jquery-ui.min.js"></script>
+    <script src="../assets/pages/js/vendor/jquery.ui.touch-punch.min.js"></script>
+    <script src="../assets/pages/js/vendor/jquery.countdown.min.js"></script>
+    <script src="../assets/pages/js/vendor/sal.js"></script>
+    <script src="../assets/pages/js/vendor/jquery.magnific-popup.min.js"></script>
+    <script src="../assets/pages/js/vendor/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/pages/js/vendor/isotope.pkgd.min.js"></script>
+    <script src="../assets/pages/js/vendor/counterup.js"></script>
+    <script src="../assets/pages/js/vendor/waypoints.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="../assets/pages/js/main.js"></script>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <!-- AngularJS Router -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.min.js"></script>
+    <!-- Your route.js file -->
+    <script src="route/route.js"></script>
+
+    <script src="controller/home.controller.js"></script>
+    <script src="controller/order.controller.js"></script>
+    <!--Thong bao-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</body>
+</html>

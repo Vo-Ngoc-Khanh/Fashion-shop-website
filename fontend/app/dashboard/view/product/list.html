@@ -1,0 +1,103 @@
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">List products</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-row align-items-center">
+                <div class="col-auto ml-auto">
+                  <label class="sr-only" for="statusFilter">Status:</label>
+                  <select class="form-control mb-2" id="statusFilter" ng-model="filterStatus" ng-change="applyFilter()">
+                    <option value="">All</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="INACTIVE">Inactive</option>
+                  </select>
+                </div>
+                <div class="col-auto">
+                  <label class="sr-only" for="searchInput">Search:</label>
+                  <input type="text" class="form-control mb-2" id="searchInput" ng-model="searchText" ng-change="applyFilter()" placeholder="Search">
+                </div>
+              </div>
+            </div>                                
+            <!-- /.card-body -->
+            <div class="card-body">
+              <table class="table table-bordered table-hover table-fixed">
+                <colgroup>
+                  <col style="width: 150px;">
+                  <col style="width: 100px;">
+                  <col style="width: 50px;">
+                  <col style="width: 300px;">
+                  <col style="width: 100px;">
+                  <col style="width: 100px;">
+                  <col style="width: 100px;">
+                  <col style="width: 150px;">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="product in filteredProducts = (products | filter: {status: filterStatus} | filter: searchText | orderBy:'-productId')">
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category.categoryName }}</td>
+                    <td>
+                      <img ng-src="{{product.image}}" alt="Product Image" width="100" height="100">
+                    </td>                    
+                    <td>{{ product.description }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>
+                      <select ng-model="product.status" ng-change="updateProductStatus(product)">
+                        <option value="ACTIVE">Active</option>
+                        <option value="INACTIVE">Inactive</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" ng-click="goToEditPage(product.productId)">
+                        <i class="fas fa-pencil-alt"></i> Edit
+                      </button>                                                         
+                      <button class="btn btn-danger btn-sm" ng-click="deleteProduct(product.productId)">
+                        <i class="fas fa-trash-alt"></i> Delete
+                      </button>
+                    </td>
+                    
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  
+  

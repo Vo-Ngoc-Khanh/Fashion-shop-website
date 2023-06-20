@@ -1,0 +1,96 @@
+<div class="axil-product-cart-area axil-section-gap">
+    <div class="container">
+        <div class="axil-product-cart-wrap">
+            <div class="product-table-heading">
+                <h4 class="title">Your Cart</h4>
+                <a href="#!/cart" class="cart-clear" ng-click="deleteAllItemsFromCart()">Clear Shopping Cart</a>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table axil-product-table axil-cart-table mb--40">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="product-remove"></th>
+                            <th scope="col" class="product-thumbnail">Product</th>
+                            <th scope="col" class="product-title"></th>
+                            <th scope="col" class="product-price">Price</th>
+                            <th scope="col" class="product-quantity">Quantity</th>
+                            <th scope="col" class="product-subtotal">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in cart track by item.id">
+                            <td class="product-remove"><a href="#!/cart" class="remove-wishlist" ng-click="deleteItemFromCart()"><i class="fal fa-times"></i></a></td>
+                            <td class="product-thumbnail"><a href="#!/detail/{{item.id}}"><img ng-src="{{item.image}}" alt="{{item.name}}"></a></td>
+                            <td class="product-title"><a href="#!/detail/{{item.id}}">{{item.name}}</a></td>
+                            <td class="product-price" data-title="Price"><span class="currency-symbol">$</span>{{item.price}}</td>
+                            <td class="product-quantity" data-title="Qty">
+                                <div class="pro-qty">
+                                    <input type="number" class="quantity-input" ng-model="item.quantity" ng-change="updateQuantity()">
+                                </div>
+                            </td>
+                            <td class="product-subtotal" data-title="Subtotal">
+                                <span class="currency-symbol">$</span>{{item.price * item.quantity}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="cart-update-btn-area">
+                <div class="input-group product-cupon">
+                    <input placeholder="Enter coupon code" type="text">
+                    <div class="product-cupon-btn">
+                        <button type="submit" class="axil-btn btn-outline">Apply</button>
+                    </div>
+                </div>
+                <div class="update-btn">
+                    <a href="#!/home" class="axil-btn btn-outline">Contiue Shopping</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">
+                    <div class="axil-order-summery mt--80">
+                        <h5 class="title mb--20">Order Summary</h5>
+                        <div class="summery-table-wrap">
+                            <table class="table summery-table mb--30">
+                                <tbody>
+                                    <tr class="order-subtotal">
+                                        <td>Subtotal</td>
+                                        <td>${{calculateTotal()}}</td>
+                                    </tr>
+                                    <tr class="order-shipping">
+                                        <td>Shipping</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input type="radio" id="radio1" name="shipping" checked>
+                                                <label for="radio1">Free Shipping</label>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="radio" id="radio2" name="shipping">
+                                                <label for="radio2">Local: $35.00</label>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="radio" id="radio3" name="shipping">
+                                                <label for="radio3">Flat rate: $12.00</label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-tax">
+                                        <td>State Tax</td>
+                                        <td>$0</td>
+                                    </tr>
+                                    <tr class="order-total">
+                                        <td>Total</td>
+                                        <td class="order-total-amount">${{calculateTotal()}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a class="axil-btn btn-bg-primary checkout-btn" ng-click="gotoCheckoutPage()">Process to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Cart Area  -->

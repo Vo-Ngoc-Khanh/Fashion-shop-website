@@ -1,0 +1,78 @@
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Edit product</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" placeholder="Input product name" ng-model="product.name" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="categoryId">Category:</label>
+                    <select class="form-control" ng-model="product.categoryId">
+                      <option value="">{{product.category.categoryName}}</option>
+                      <option ng-repeat="category in categories" ng-selected="category.categoryId == product.categoryId && category.categoryName !== product.category.categoryName" value="{{category.categoryId}}" ng-if="category.categoryName !== product.category.categoryName">{{category.categoryName}}</option>
+                    </select>
+                  </div>                                                              
+                </div>
+                
+                <div class="form-group">
+                  <label for="description">Description:</label>
+                  <textarea class="form-control" id="description" ng-model="product.description"></textarea>
+                </div>                
+                
+                <div class="form-group">
+                  <label for="price">Price:</label>
+                  <div class="input-group">
+                    <input type="number" class="form-control" placeholder="Input price" ng-model="product.price" required>
+                    <div class="input-group-append">
+                      <span class="input-group-text">USD</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="quantity">Quantity:</label>
+                  <input type="number" class="form-control" placeholder="Input quantity" ng-model="product.quantity" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="image">Image:</label>
+                  <input type="text" class="form-control" placeholder="Input name image" ng-model="product.image" required>
+                </div>
+  
+                <div class="form-group">
+                  <label for="status">Status:</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" ng-model="product.status" value="ACTIVE">
+                    <label class="form-check-label">Active</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" ng-model="product.status" value="INACTIVE">
+                    <label class="form-check-label">Inactive</label>
+                  </div>
+                </div>
+                               
+                <button type="submit" class="btn btn-primary" ng-click="updateProduct()">Submit</button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+  

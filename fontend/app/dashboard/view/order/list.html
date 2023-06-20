@@ -1,0 +1,219 @@
+<!-- Main content -->
+    <section class="content">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-12">
+            <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">List orders</h3>
+            </div> 
+            <div class="card-body">
+                <div class="form-row align-items-center">
+                    <div class="col-auto ml-auto">
+                    <label class="sr-only" for="statusFilter">Status:</label>
+                    <select class="form-control mb-2" id="statusFilter" ng-model="filterStatus" ng-change="applyFilter()">
+                        <option value="">All</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Shipping">Shipping</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    </div>
+                    <div class="col-auto">
+                    <label class="sr-only" for="searchInput">Search:</label>
+                    <input type="text" class="form-control mb-2" id="searchInput" ng-model="searchText" ng-change="applyFilter()" placeholder="Search">
+                    </div>
+                </div>
+            </div>
+                                            
+            <!-- /.card-body -->
+            <div class="card-body">
+                <table class="table table-bordered table-hover table-fixed">
+                <thead>
+                    <tr>
+                    <th>Order</th>
+                    <th>Custommer</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="order in filteredOrders = (orders | filter: {status: filterStatus} | filter: searchText| orderBy:'-orderId')">
+                    <td>#{{order.orderId }}</td>
+                    <td>{{order.user.fullname }}</td>                  
+                    <td>${{order.totalAmount}} for {{order.orderDetail.length}} item</td>
+                    <td>{{order.date}}</td>
+                    <td>{{order.user.phone}}</td>
+                    <td>
+                        <select ng-model="order.status" ng-change="updateStatusOrder(order.orderId, order.status)">
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Shipping">Shipping</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </td>
+                    <!-- <td>
+                        <select ng-model="order.status" ng-change="updateStatusOrder(order)" ng-if="order.status === 'Pending'">
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                        </select>
+                        <p ng-if="order.status !== 'Pending'">{{order.status}}</p>
+                    </td>    -->
+                    <td>
+                        <button class="btn btn-primary btn-sm" ng-click="getModalOrderDetail(order.orderId)" data-toggle="modal" data-target="#modal-xl">
+                            <i class="far fa-eye"></i> View Detail
+                        </button>      
+                        <button class="btn btn-warning btn-sm" ng-click="getModalOrderDetail(order.orderId)" data-toggle="modal" data-target="#modal-update-shipping" ng-disabled="order.status === 'Shipping' || order.status === 'Completed' || order.status === 'Cancelled'">
+                            <i class="fas fa-shipping-fast"></i> Shipping
+                        </button>    
+                        <button class="btn btn-success btn-sm" ng-click="updateStatusOrder(order.orderId, 'Completed')" data-toggle="modal" data-target="#modal-update" ng-disabled="order.status === 'Completed' || order.status === 'Cancelled'">
+                            <i class="far fa-calendar-check"></i> Complete
+                        </button> 
+                        <button class="btn btn-danger btn-sm" ng-click="getModalOrderDetail(order.orderId)" data-toggle="modal" data-target="#modal-update-cancel" ng-disabled="order.status === 'Completed' || order.status === 'Cancelled'">
+                            <i class="fas fa-backspace"></i> Cancel
+                        </button>                                                  
+                     </td>                                                                       
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                    <th>Order</th>
+                    <th>Custommer</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    </tr>
+                </tfoot>
+                </table>
+            </div>
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  
+    <div class="modal fade" id="modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fas fa-info-circle"></i> Order Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="customer-info">
+                                <h5 class="font-weight-bold mb-3"><i class="fas fa-user"></i> Customer Information</h5>
+                                <p><strong>Name:</strong> {{order.user.fullname}}</p>
+                                <p><strong>Address:</strong> {{order.user.address}}</p>
+                                <p><strong>Phone:</strong> {{order.user.phone}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="order-info">
+                                <h5 class="font-weight-bold mb-3"><i class="fas fa-clipboard-list"></i> Order Information</h5>
+                                <p><strong>Order ID:</strong> {{order.orderId}}</p>
+                                <p><strong>Status:</strong> {{order.status}}</p>
+                                <p><strong>Total Amount:</strong> ${{order.totalAmount}}</p>
+                                <p ng-if="order.cancelReason !== null"><strong>Cancel Reason:</strong> {{order.cancelReason}}</p>
+                                <p><strong>Date:</strong> {{order.date}}</p>
+                                <p ng-if="order.eddate !==null"><strong>Estimated Delivery Date:</strong> {{order.eddate}}</p>
+                                <p ng-if="order.eddate ===null"><strong>Estimated Delivery Date:</strong> pending</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="order-details">
+                        <h5 class="font-weight-bold mt-4"><i class="fas fa-list-ul"></i> Order Details</h5>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="detail in order.orderDetail">
+                                        <td>
+                                            <img ng-src="{{detail.product.image}}" alt="Product Image" width="50" height="50">
+                                        </td>
+                                        <td>{{detail.product.name}}</td>
+                                        <td>{{detail.quantity}}</td>
+                                        <td>${{detail.product.price}}</td>
+                                        <td>${{detail.quantity * detail.product.price}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+    
+    <div class="modal fade" id="modal-update-shipping">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fas fa-truck"></i> Update Shipping Status</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label><i class="far fa-calendar-alt"></i> Expected delivery date:</label>
+                    <input type="date" class="form-control" ng-model="eddate" ng-change="checkFormValidity2()">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="updateStatusOrder(order.orderId, 'Shipping')" data-dismiss="modal" ng-disabled="!isFormValid2">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="modal fade" id="modal-update-cancel">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fas fa-backspace"></i> Update Cancel Status</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label><i class="fas fa-exclamation-circle"></i> Cancellation reason:</label>
+                    <input type="text" class="form-control" ng-model="cancelReason" placeholder="Input reason cancel" ng-change="checkFormValidity1()">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="updateStatusOrder(order.orderId, 'Cancelled')" data-dismiss="modal" ng-disabled="!isFormValid1">Save changes</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
